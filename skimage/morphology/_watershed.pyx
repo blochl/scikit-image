@@ -16,7 +16,7 @@ cimport numpy as cnp
 cimport cython
 
 
-ctypedef cnp.int32_t DTYPE_INT32_t
+ctypedef cnp.int8_t DTYPE_INT8_t
 ctypedef cnp.int8_t DTYPE_BOOL_t
 
 
@@ -45,7 +45,7 @@ cdef inline double _euclid_dist(Py_ssize_t pt0, Py_ssize_t pt1,
 @cython.boundscheck(False)
 @cython.cdivision(True)
 @cython.unraisable_tracebacks(False)
-cdef inline DTYPE_BOOL_t _diff_neighbors(DTYPE_INT32_t[::1] output,
+cdef inline DTYPE_BOOL_t _diff_neighbors(DTYPE_INT8_t[::1] output,
                                          cnp.intp_t[::1] structure,
                                          DTYPE_BOOL_t[::1] mask,
                                          Py_ssize_t index):
@@ -56,7 +56,7 @@ cdef inline DTYPE_BOOL_t _diff_neighbors(DTYPE_INT32_t[::1] output,
     """
     cdef:
         Py_ssize_t i, neighbor_index
-        DTYPE_INT32_t neighbor_label0, neighbor_label1
+        DTYPE_INT8_t neighbor_label0, neighbor_label1
         Py_ssize_t nneighbors = structure.shape[0]
 
     if not mask[index]:
@@ -83,7 +83,7 @@ def watershed_raveled(cnp.float64_t[::1] image,
                       DTYPE_BOOL_t[::1] mask,
                       cnp.intp_t[::1] strides,
                       cnp.double_t compactness,
-                      DTYPE_INT32_t[::1] output,
+                      DTYPE_INT8_t[::1] output,
                       DTYPE_BOOL_t wsl):
     """Perform watershed algorithm using a raveled image and neighborhood.
 

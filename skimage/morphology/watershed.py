@@ -47,7 +47,7 @@ def _validate_inputs(image, markers, mask):
     -------
     image, markers, mask : arrays
         The validated and formatted arrays. Image will have dtype float64,
-        markers int32, and mask int8. If ``None`` was given for the mask,
+        markers int8, and mask int8. If ``None`` was given for the mask,
         it is a volume of all 1s.
 
     Raises
@@ -67,7 +67,7 @@ def _validate_inputs(image, markers, mask):
         # Use a complete `True` mask if none is provided
         mask = np.ones(image.shape, bool)
     return (image.astype(np.float64),
-            markers.astype(np.int32),
+            markers.astype(np.int8),
             mask.astype(np.int8))
 
 
